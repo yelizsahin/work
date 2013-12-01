@@ -30,7 +30,7 @@ while back < 10 % test edek:)
 
     figure( figureCount ),imshow(arr)
     figureCount = figureCount + 1; 
-    arr(pastx,pasty) = 1; %bu siliyo demi?evt
+    arr(pastx,pasty) = 1;  
     if   pointx== 0 & pointy == 0
         return
     end

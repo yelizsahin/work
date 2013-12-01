@@ -55,59 +55,54 @@ for k = 0 : zeroCount-1
         p2(1,2)=info(result2,2);
         k1(1,1)=(p1(1,1)+p2(1,1))/2 ;
         k1(1,2)=(p1(1,2)+p2(1,2))/2 ;  
-        k1
-        p1
-        p2
+    
         if ilknokta == 1
-                 k1(1,1)= p1(1,1) - 0 ;
+                 k1(1,1)= p1(1,1) - 3 ;
                  k1(1,2)= p1(1,2) - 3; 
                  ilknokta = 2;
-        else 
-            %goback i çaðýr.
-                % goback sonucu aðer k1 p1 ve p2 arasýnda ise k1 in p1 e
-                % göre simetriðini almalýyýz. ama bi düþünüyüm bi saniye.
+        else    
             [k1(1,1),k1(1,2) ] =  goBack ( im , p1(1,1) ,p1(1,2));
             
-         if p1(1,1) <= p2 (1,1)  %  p1.x   ---~~  p2.x  sýrasýnda
-              if (k1(1,1) <= p2(1,1) &  k1(1,1)>= p1(1,1))  %  p1---~~k1      k1---~~p2     p1---k1---~~p2 sýrasýnda
-                  
-           
-                %    k1(1,2) = (2 * p1(1,2) - k1(1,2)); 
-                  %  im(k1(1,1),k1( 1,2)) = 0;
-                  %  figure(5001),imshow(im) % iþimiz bununlaymýþ
-                  
-                   
-              end
-         
-          else  %  p2.x   ---  p1.x  sýrasýnda
-              if (k1(1,1) >= p2(1,1) &  k1(1,1)<= p1(1,1))  %  p2---~~k1     k1---~~p1     p2---k1---p1 sýrasýnda
-                 %   k1(1,1) = (2 * p1(1,1) - k1(1,1));  %%%% bu arada sonuçta hiç bir deðiþiklikte olmaya bilir.:) ama bi bakalým.denemekten zarar gelmez
-                  %  k1(1,2) = (2 * p1(1,2) - k1(1,2)); %bak dene.
-                   %   im(k1(1,1),k1(1,2)) = 0;
-                   % figure(5002),imshow(im)
-                   
-              end
-         end  
-
-         if p1(1,2) <= p2 (1,2)  %  p1.x   ---~~  p2.x  sýrasýnda
-                 if (k1(1,2) <= p2(1,2) &  k1(1,2)>= p1(1,2))  %  p1---~~k1      k1---~~p2     p1---k1---~~p2 sýrasýnda
-                  %  k1(1,1) = (2 * p1(1,1) - k1(1,1));   
-                   % k1(1,2) = (2 * p1(1,2) - k1(1,2)); 
-                  %    im(k1(1,1),k1(1,2)) = 0;
-                 %   figure(5003),imshow(im)
-                    
-                 end
-             % bide buna bak:)
-         else  %  p2.x   ---  p1.x  sýrasýnda
-               if (k1(1,2) >= p2(1,2) &  k1(1,2)<= p1(1,2))  %  p2---~~k1     k1---~~p1     p2---k1---p1 sýrasýnda
-                %    k1(1,1) = (2 * p1(1,1) - k1(1,1));  %%%% bu arada sonuçta hiç bir deðiþiklikte olmaya bilir.:) ama bi bakalým.denemekten zarar gelmez
-                 %   k1(1,2) = (2 * p1(1,2) - k1(1,2)); %bak dene.
-                  %    im(k1(1,1),k1(1,2)) = 0;
-                   % figure(5004),imshow(im)
-                  %  return;
-               end
-         end 
-        end
+%          if p1(1,1) <= p2 (1,1)  %  p1.x   ---~~  p2.x  sýrasýnda
+%               if (k1(1,1) <= p2(1,1) &  k1(1,1)>= p1(1,1))  %  p1---~~k1      k1---~~p2     p1---k1---~~p2 sýrasýnda
+%                   
+%            
+%                 %    k1(1,2) = (2 * p1(1,2) - k1(1,2)); 
+%                   %  im(k1(1,1),k1( 1,2)) = 0;
+%                   %  figure(5001),imshow(im) % iþimiz bununlaymýþ
+%                   
+%                    
+%               end
+%          
+%           else  %  p2.x   ---  p1.x  sýrasýnda
+%               if (k1(1,1) >= p2(1,1) &  k1(1,1)<= p1(1,1))  %  p2---~~k1     k1---~~p1     p2---k1---p1 sýrasýnda
+%                  %   k1(1,1) = (2 * p1(1,1) - k1(1,1));  %%%% bu arada sonuçta hiç bir deðiþiklikte olmaya bilir.:) ama bi bakalým.denemekten zarar gelmez
+%                   %  k1(1,2) = (2 * p1(1,2) - k1(1,2)); %bak dene.
+%                    %   im(k1(1,1),k1(1,2)) = 0;
+%                    % figure(5002),imshow(im)
+%                    
+%               end
+%          end  
+% 
+%          if p1(1,2) <= p2 (1,2)  %  p1.x   ---~~  p2.x  sýrasýnda
+%                  if (k1(1,2) <= p2(1,2) &  k1(1,2)>= p1(1,2))  %  p1---~~k1      k1---~~p2     p1---k1---~~p2 sýrasýnda
+%                   %  k1(1,1) = (2 * p1(1,1) - k1(1,1));   
+%                    % k1(1,2) = (2 * p1(1,2) - k1(1,2)); 
+%                   %    im(k1(1,1),k1(1,2)) = 0;
+%                  %   figure(5003),imshow(im)
+%                     
+%                  end
+%              % bide buna bak:)
+%          else  %  p2.x   ---  p1.x  sýrasýnda
+%                if (k1(1,2) >= p2(1,2) &  k1(1,2)<= p1(1,2))  %  p2---~~k1     k1---~~p1     p2---k1---p1 sýrasýnda
+%                 %    k1(1,1) = (2 * p1(1,1) - k1(1,1));  %%%% bu arada sonuçta hiç bir deðiþiklikte olmaya bilir.:) ama bi bakalým.denemekten zarar gelmez
+%                  %   k1(1,2) = (2 * p1(1,2) - k1(1,2)); %bak dene.
+%                   %    im(k1(1,1),k1(1,2)) = 0;
+%                    % figure(5004),imshow(im)
+%                   %  return;
+%                end
+%          end 
+       end
         im=newtonInt(im,p1,p2,k1,sizex,sizey); % bu sýra doðru mu?sanki.bana niye yanlýþ geldi karar noktasý ilk deðiþken deðil miydi?hangisi aþkým anlamadým
        
     figure(k+1),imshow(im)

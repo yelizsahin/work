@@ -2,10 +2,8 @@
 function arr = newtonInt( arr,p1,p2,k1,sizex,sizey )
 drawtest = 2;
 drawall = true;
-% þimd normal çizimi test edek.
 
-
-test = 0; %ee hangisi bea hiçbiri :))
+test = 0; 
 all = true;
 if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
     %fprintf('yler farký büyük');
@@ -30,7 +28,7 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
     f_t1 =  k1(1,1); 
     f_t2 =  p1(1,1); 
     f_t3 =  p2(1,1); 
-    
+    % bu doðru mu baksana bi 
     f_t1_t2 = (f_t2 - f_t1) / (t2 - t1); % t2 ve t1 hiçbir zaman eþit olmamalý p1.x != k1.x
     f_t2_t3 = (f_t3 - f_t2) / (t3 - t2); %t3 ve t2 hiçbir zaman eþit olmamalý p1.x != p2.x
     f_t1_t2_t3 = (f_t2_t3 - f_t1_t2) / (t3 - t1); %t3 ve t1 hiçbir zaman eþit olmamalý p2.x != k1.x
@@ -61,7 +59,7 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                        arr(y,t) = 0;  % ilk hata nedeni
                        connected = connectedCheck(arr ,y , t);
                        if connected ~= true  & ~(y== p1(1,1) & t == p1(1,2) |  y == p2(1,1) & t == p2(1,2))
-                           [pointx, pointy] = connectedPoint(arr ,pastx , pasty  );
+                           [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
 
                        innerk1(1,1) = pointx;
                        innerk1(1,2) = pointy;
@@ -70,18 +68,13 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                        innerp2(1,1) = y;
                        innerp2(1,2) = t;
                         if test == 1 | all == true
-                            1
-                            innerk1 
-                           innerp1
-                           innerp2
-                           if ~(pointx == 0 & pointy == 0) %yukarýlara ekle ayný þey ama olsun.
-                                 arr=newtonInt(arr,innerp1,innerp2,innerk1,sizex,sizey); % þimdi ilk sorunlarý çözen kýsmý bul burdakileri
-                                % bura mý?evet deðil gibi
+                      
+                           if ~(pointx == 0 & pointy == 0) 
+                                 arr = newtonInt(arr,innerp1,innerp2,innerk1,sizex,sizey);
+                              
                            end
 
-                        end % bunu da ekle baride daha iyi test edek.yaa azcýk karýþýk geldi nereye 
-                  % nasýl? þimdilik?daha iyi ama karar noktasý sýkýntýsýndan dolayý
-                  % böyle tek boþluk kaldý sadece ayrýca da??ne?
+                        end
                        end
                 end
                pastx = y;
@@ -101,10 +94,8 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                 arr(y,t) = 0 ;
                 connected = connectedCheck(arr ,y , t );
                 if connected ~= true &  ~(y == p1(1,1) & (t == p1(1,2)) |  y == p2(1,1) & ( t == p2(1,2)))
-                    [pointx, pointy] = connectedPoint(arr ,pastx , pasty  );
+                   [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
                  
-                    
-                     
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
                innerp1(1,1)= pastx;
@@ -112,11 +103,8 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                innerp2(1,1) = y;
                innerp2(1,2) = t;
                 if test == 2 | all == true
-                    2
-                     innerk1 
-                   innerp1
-                   innerp2
-                   if ~(pointx == 0 & pointy == 0) %yukarýlara ekle ayný þey ama olsun.
+               
+                   if ~(pointx == 0 & pointy == 0) 
                          arr=newtonInt(arr,innerp1,innerp2,innerk1,sizex,sizey);
                    end
                
@@ -179,30 +167,22 @@ if  t2 > t3
             connected = connectedCheck(arr ,t , y );
             
             if connected ~= true & ~(t == p1(1,1) & y == p1(1,2) |  t == p2(1,1) & y == p2(1,2))
-                [pointx, pointy]= connectedPoint(arr ,pastx , pasty  ) ;
-                  pointx
-                    pointy
+                 [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+               
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
                innerp1(1,1)= pastx;
                innerp1(1,2)= pasty;
                innerp2(1,1) = t;
                innerp2(1,2) = y;
-                if test == 3 | all == true
-                   
-                    3
-                     innerk1 
-                    innerp1
-                  innerp2                         %aþkým biz yarýn kaçta buluþcaz 12.3 iyi mi..evet iyi sanýrým ama þimdi çok yoruldum artýk ben.tmm burda býrakalým zaten benm de yarýn için ha.z.ý.rlanmam lazým..hýmm. buarada kodda onlar yanlýþ çiziyor onlarda çözülürse ilk kýsým gibi çizerler biraz düþünmek lazým hmm sence çok iþi var mý aþkým. yok bence ama iþte.çarþamba 2 tane iç içe çember götürmem lazým okula:) kaðýda çiz götür sende ooooooo komik.yaparýz o zamana kadar belki dur bakalým. en azýndan iç içe kýsmýný hallederiz.ok aþkým sen öyle dedikten sonra ben sana güveniyorum ki yarýn ne giycem bilion mu.hauyýr.tmm yarn görürsün .had bakalým.sen napcan þimdi.az dinleniyim ya kaç gündür hayatýmýn en yoðun g
-                 %%günleriydi.tamam caným belki sen de yarýn benm için
-                 %%süslenirsin.ya yorgunum þuan. aman tamam yaa hadi dinlen
-                 %%iyi geceler.saðol caným sana da kpss ya bakcam az
-                    if ~(pointx == 0 & pointy == 0) %yukarýlara ekle ayný þey ama olsun.
+                if test == 3 | all == true  % nweton int daha iyi çiziyodu tek geri gidince:)
+                 
+                    if ~(pointx == 0 & pointy == 0)  
                     arr=newtonInt(arr,innerp1,innerp2,innerk1,sizex,sizey);
                    end
                 end
             end
-            end % yazdýr bi pointx ve y yi
+              end  
 
             count = count +1;
             pastx = t;
@@ -213,7 +193,7 @@ if  t2 > t3
 else
     count = 0;
     pastx = 0;
-    pasty = 0; % þu past x pasty yapýsýný diðerlerine de yap aim ya bi k
+    pasty = 0;  
     for t=t2:t3
         y = int32(f_t1 +f_t1_t2 * (t - t1) + f_t1_t2_t3 * (t - t1) * (t - t2));
         if y < sizex & y>0
@@ -222,23 +202,20 @@ else
             connected = connectedCheck(arr ,t , y ); 
              
             if connected ~= true & ~(t == p1(1,1) & y == p1(1,2) |  t == p2(1,1) & y == p2(1,2))
-                  [pointx, pointy] = connectedPoint(arr ,pastx , pasty );
-                  
-                    pointx
-                    pointy
+               
+
+                  [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+                     
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
                innerp1(1,1)= pastx;
                innerp1(1,2)=pasty;
                innerp2(1,1) = t;
                innerp2(1,2) = y;
-                %  diðerlerine de yap aynýsýný return den önce ama t ve y
+                
                 if test == 4 | all ==true
-                   4
-                  innerk1 
-                   innerp1 
-                   innerp2
-                    if ~(pointx == 0 & pointy == 0) %yukarýlara ekle ayný þey ama olsun.
+                  
+                    if ~(pointx == 0 & pointy == 0)  
                         arr=newtonInt(arr,innerp1,innerp2,innerk1,sizex,sizey);
                    end
                   
@@ -266,9 +243,8 @@ end
 function [pointx, pointy] = connectedPoint ( arr, t ,y )  %yaaa eskisi nde daha yiyi çiziodu..sen bi çözde þu ters dönmesini
              pointx = 0;
              pointy=0; 
-        if t==0 | y==0
-            t
-y
+        if t==0 | y==0 
+  
         return
         end
     if   arr( t-1 ,y-1) == 0 
@@ -280,7 +256,9 @@ y
         pointy=y-1;
     end
     if arr( t+1 ,y-1) == 0
-            pointx=t+1; %ilk çizeni arýoz demi...hayýr yanlýþ çizenleri tmm ilk de var
+            pointx=t+1; 
+            
+            
             pointy=y-1;
     end
     if arr( t+1 ,y) == 0
