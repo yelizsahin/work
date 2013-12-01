@@ -61,7 +61,7 @@ for k = 0 : zeroCount-1
                  k1(1,2)= p1(1,2) - 3; 
                  ilknokta = 2;
         else    
-            [k1(1,1),k1(1,2) ] =  goBack ( im , p1(1,1) ,p1(1,2));
+            [k1(1,1),k1(1,2) ] =  goBack ( im , p1(1,1) ,p1(1,2),10);
             
 %          if p1(1,1) <= p2 (1,1)  %  p1.x   ---~~  p2.x  sýrasýnda
 %               if (k1(1,1) <= p2(1,1) &  k1(1,1)>= p1(1,1))  %  p1---~~k1      k1---~~p2     p1---k1---~~p2 sýrasýnda

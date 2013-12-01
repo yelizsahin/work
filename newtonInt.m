@@ -1,12 +1,12 @@
-%iki noktayý baðlamak için kullanýlan method
+ 
 function arr = newtonInt( arr,p1,p2,k1,sizex,sizey )
 drawtest = 2;
 drawall = true;
-
+ 
 test = 0; 
 all = true;
 if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
-    %fprintf('yler farký büyük');
+ 
     if  k1(1,1)== p1(1,1)
         k1(1,1)= k1(1,1)+1;
     end
@@ -28,27 +28,17 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
     f_t1 =  k1(1,1); 
     f_t2 =  p1(1,1); 
     f_t3 =  p2(1,1); 
-    % bu doðru mu baksana bi 
-    f_t1_t2 = (f_t2 - f_t1) / (t2 - t1); % t2 ve t1 hiçbir zaman eþit olmamalý p1.x != k1.x
-    f_t2_t3 = (f_t3 - f_t2) / (t3 - t2); %t3 ve t2 hiçbir zaman eþit olmamalý p1.x != p2.x
-    f_t1_t2_t3 = (f_t2_t3 - f_t1_t2) / (t3 - t1); %t3 ve t1 hiçbir zaman eþit olmamalý p2.x != k1.x
     
+  
     if  t2 > t3
         count=0; 
         pastx = 0;
         pasty = 0;
-        
-        t1 =  k1(1,2); %x0
-        t2 =  p1(1,2); %x1
-        t3 =  p2(1,2); %x2
-        
-        f_t1 =  k1(1,1); % f(x0)
-        f_t2 =  p1(1,1); % f(x1)
-        f_t3 =  p2(1,1); % f(x2)
+     
                
-        f_t3_t2 = (f_t3 - f_t2) / (t3 - t2); % t2 ve t1 hiçbir zaman eþit olmamalý p1.x != k1.x
-        f_t2_t1 = (f_t2 - f_t1) / (t2 - t1); %t3 ve t2 hiçbir zaman eþit olmamalý p1.x != p2.x
-        f_t3_t2_t1 = (f_t3_t2 - f_t2_t1) / (t3 - t1); %t3 ve t1 hiçbir zaman eþit olmamalý p2.x != k1.x
+        f_t3_t2 = (f_t3 - f_t2) / (t3 - t2); % t2 ve t1 hiçbir zaman e?it olmamal? p1.x != k1.x
+        f_t2_t1 = (f_t2 - f_t1) / (t2 - t1); %t3 ve t2 hiçbir zaman e?it olmamal? p1.x != p2.x
+        f_t3_t2_t1 = (f_t3_t2 - f_t2_t1) / (t3 - t1); %t3 ve t1 hiçbir zaman e?it olmamal? p2.x != k1.x
         
         connected = true;
         for t=t3:t2
@@ -59,7 +49,7 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                        arr(y,t) = 0;  % ilk hata nedeni
                        connected = connectedCheck(arr ,y , t);
                        if connected ~= true  & ~(y== p1(1,1) & t == p1(1,2) |  y == p2(1,1) & t == p2(1,2))
-                           [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+                           [pointx , pointy ] =  goBack(arr, pastx , pasty,10); % yap de?i?iklikleri
 
                        innerk1(1,1) = pointx;
                        innerk1(1,2) = pointy;
@@ -83,6 +73,10 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
             end
         end
     else
+  f_t1_t2 = (f_t2 - f_t1) / (t2 - t1); % t2 ve t1 hiçbir zaman e?it olmamal? p1.x != k1.x
+    f_t2_t3 = (f_t3 - f_t2) / (t3 - t2); %t3 ve t2 hiçbir zaman e?it olmamal? p1.x != p2.x
+    f_t1_t2_t3 = (f_t2_t3 - f_t1_t2) / (t3 - t1); %t3 ve t1 hiçbir zaman e?it olmamal? p2.x != k1.x
+    
         count = 0;
         pastx = 0;
         pasty = 0;
@@ -94,7 +88,7 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
                 arr(y,t) = 0 ;
                 connected = connectedCheck(arr ,y , t );
                 if connected ~= true &  ~(y == p1(1,1) & (t == p1(1,2)) |  y == p2(1,1) & ( t == p2(1,2)))
-                   [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+                   [pointx , pointy ] =  goBack(arr, pastx , pasty,10); % yap de?i?iklikleri
                  
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
@@ -119,7 +113,7 @@ if  abs(p2(1,2)-p1(1,2)) > abs(p1(1,1)-p2(1,1))
     end
     
 else
-%fprintf('xler farký büyük');
+%fprintf('xler fark? büyük');
 if k1(1,1) == p1(1,1)
     k1(1,1) = k1(1,1)+1;
 end
@@ -141,33 +135,27 @@ f_t1 =  k1(1,2); % f(x0)
 f_t2 =  p1(1,2); % f(x1)
 f_t3 =  p2(1,2); % f(x2)
 
-f_t1_t2 = (f_t2 - f_t1) / (t2 - t1); % t2 ve t1 hiçbir zaman eþit olmamalý p1.x != k1.x
-f_t2_t3 = (f_t3 - f_t2) / (t3 - t2); %t3 ve t2 hiçbir zaman eþit olmamalý p1.x != p2.x
-f_t1_t2_t3 = (f_t2_t3 - f_t1_t2) / (t3 - t1); %t3 ve t1 hiçbir zaman eþit olmamalý p2.x != k1.x
 
 if  t2 > t3
-  
-    t1 =  k1(1,1); %x0
-    t2 =  p1(1,1); %x1
-    t3 =  p2(1,1); %x2
-    
-    f_t3_t2 = (f_t3 - f_t2) / (t3 - t2); % t2 ve t1 hiçbir zaman eþit olmamalý p1.x != k1.x
-    f_t2_t1 = (f_t2 - f_t1) / (t2 - t1); %t3 ve t2 hiçbir zaman eþit olmamalý p1.x != p2.x
-    f_t3_t2_t1 = (f_t3_t2 - f_t2_t1) / (t3 - t1); %t3 ve t1 hiçbir zaman eþit olmamalý p2.x != k1.x
-    
+   
     count=0; 
     pastx = 0;
     pasty = 0;
     
+   
+    f_t3_t2 = (f_t3 - f_t2) / (t3 - t2); % t2 ve t1 hiçbir zaman e?it olmamal? p1.x != k1.x
+    f_t2_t1 = (f_t2 - f_t1) / (t2 - t1); %t3 ve t2 hiçbir zaman e?it olmamal? p1.x != p2.x
+    f_t3_t2_t1 = (f_t3_t2 - f_t2_t1) / (t3 - t1); %t3 ve t1 hiçbir zaman e?it olmamal? p2.x != k1.x
+   
     for t=t3:t2
-        y = int32(f_t3 + f_t3_t2 * (t - t3) + f_t3_t2_t1 * (t - t3) * (t - t2)); % demekki bu yanlýþ.nasýl düzeltcez.backward newton a bak tekrar netten.
+        y = int32(f_t3 + f_t3_t2 * (t - t3) + f_t3_t2_t1 * (t - t3) * (t - t2)); % demekki bu yanl??.nas?l düzeltcez.backward newton a bak tekrar netten.
         if y < sizex & y>0
               if drawall==true | drawtest==3
             arr(t,y) = 0; % ikinci hata nedeni
             connected = connectedCheck(arr ,t , y );
             
             if connected ~= true & ~(t == p1(1,1) & y == p1(1,2) |  t == p2(1,1) & y == p2(1,2))
-                 [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+                 [pointx , pointy ] =  goBack(arr, pastx , pasty,10); % yap de?i?iklikleri
                
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
@@ -191,6 +179,9 @@ if  t2 > t3
     end
     
 else
+f_t1_t2 = (f_t2 - f_t1) / (t2 - t1); % t2 ve t1 hiçbir zaman e?it olmamal? p1.x != k1.x
+f_t2_t3 = (f_t3 - f_t2) / (t3 - t2); %t3 ve t2 hiçbir zaman e?it olmamal? p1.x != p2.x
+f_t1_t2_t3 = (f_t2_t3 - f_t1_t2) / (t3 - t1); %t3 ve t1 hiçbir zaman e?it olmamal? p2.x != k1.x
     count = 0;
     pastx = 0;
     pasty = 0;  
@@ -204,7 +195,7 @@ else
             if connected ~= true & ~(t == p1(1,1) & y == p1(1,2) |  t == p2(1,1) & y == p2(1,2))
                
 
-                  [pointx , pointy ] =  goBack(arr, pastx , pasty); % yap deðiþiklikleri
+                  [pointx , pointy ] =  goBack(arr, pastx , pasty,10); % yap de?i?iklikleri
                      
                innerk1(1,1) = pointx;
                innerk1(1,2) = pointy;
@@ -234,13 +225,21 @@ end
 
 function check = connectedCheck ( arr, t ,y )
     check = false;
+ 
+    sizes = size(arr);
+    sizex = sizes(1);
+    sizey = sizes(2);
+    if t <= 1 | y <= 1 |t>= sizex | y >= sizey % yaa geriye ne güzel gidio o .noldu ki?çok hoþuma gitti.:)
+        check = false;
+        return
+    end
     if   arr( t-1 ,y-1) == 0 | arr( t ,y-1) == 0 | arr( t+1 ,y-1) == 0 | arr( t+1 ,y) == 0 | arr( t+1 ,y+1) == 0 | arr( t ,y+1) == 0 | arr( t-1 ,y+1) == 0 |arr( t-1 ,y) == 0
         check = true ;   
     end
 end
 
 
-function [pointx, pointy] = connectedPoint ( arr, t ,y )  %yaaa eskisi nde daha yiyi çiziodu..sen bi çözde þu ters dönmesini
+function [pointx, pointy] = connectedPoint ( arr, t ,y )  %yaaa eskisi nde daha yiyi çiziodu..sen bi çözde ?u ters dönmesini
              pointx = 0;
              pointy=0; 
         if t==0 | y==0 

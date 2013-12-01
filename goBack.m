@@ -1,5 +1,5 @@
 %10 piksel geriye gidilecek;
-function [pastx,pasty] = goBack(arr, x ,y) 
+function [pastx,pasty] = goBack(arr, x ,y, backSize) 
 sizes = size(arr);
 sizex = sizes(1);
 sizey = sizes(2);
@@ -20,7 +20,7 @@ pastx=x;
 pasty=y;
 figureCount = 1400;
 
-while back < 10 % test edek:)
+while back < backSize % test edek:)
  if pastx - 1 < 1 | pasty-1 < 1 |pastx >= sizex | pasty >= sizey % yaa geriye ne güzel gidio o .noldu ki?çok hoþuma gitti.:)
         break
     end
@@ -28,8 +28,8 @@ while back < 10 % test edek:)
 
     [pointx, pointy ] = connectedPoint( arr ,pastx,pasty); 
 
-    figure( figureCount ),imshow(arr)
-    figureCount = figureCount + 1; 
+   % figure( figureCount ),imshow(arr)
+    
     arr(pastx,pasty) = 1;  
     if   pointx== 0 & pointy == 0
         return
