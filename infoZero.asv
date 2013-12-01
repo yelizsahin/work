@@ -1,0 +1,15 @@
+%Array satýr satýr taranarak sýfýr olan yerlerin koordinatlarý bulunur.
+function info = infoZero(im ,zeroCount) 
+
+count=1;
+sizes=size(im);
+sizex=sizes(1);
+sizey=sizes(2);
+for i=1 : sizex
+    for j=1 : sizey
+        if im(i,j) == 0
+            info(count,1) = [i,j];
+            count= count + 1; 
+        end
+    end
+end

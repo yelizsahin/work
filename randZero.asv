@@ -1,0 +1,14 @@
+%Verilen matrix de rastgele yverilen sayýda 0 yerleþtirir.
+function  im = randZero(im, sizex, sizey, zeroCount,backCount)
+         for i = 1 : zeroCount
+           x = ceil(rand()*(sizex-2*backCount))+ backCount;
+           y = ceil(rand()*(sizey-2*backCount))+ backCount;
+            while im(x,y) == 0
+                x = ceil(rand()*(sizex-2*backCount))+ backCount;
+                y = ceil(rand()*(sizey-2*backCount))+ backCount;
+          %   fprintf('ayni geldi');
+            end
+         %  fprintf('farklý geldi\n');
+           im(x,y) = 0; 
+         end
+end

@@ -1,0 +1,38 @@
+% Noktalar arasýnda en kýsa uzaklýðýn bulunduðu koordinatlarý döndürür.
+% Yani a[1 1 1; 2 2 0; 3 4 0]  arrayinde 1 1 1 noktasýna en yakýn öklid
+% uzaklýðýna sahip olan 2 2 0 nokatasýnýn koordinatlarýný bize döndürür.
+% array in size ýný dinamik ayarlayabiliriz.
+function [minPointX, minPointY,index ] = euclid(info, size)
+first = true; 
+index = 1; %infoda en üst nokta default deðer
+minPointX = 1;
+minPointY = 1;
+for i = 1:size
+    if info(i,3) == 1
+        % Bir önceki adýmda en yakýn bulunmuþ ya da ilk nokta.
+        for j = 1 : size
+            if info(j,3) == 0
+                if first == true 
+                    minDist = sqrt((info(j,1)-info(i,1))^2 + (info(j,2)-info(i,2))^2); 
+                    minPointX = info(j,1);
+                    minPointY = info(j,2);
+                    index = j;
+                    first = false;
+                else
+                    if sqrt((info(j,1)-info(i,1))^2 + (info(j,2)-info(i,2))^2) <= minDist
+                        minPointX = info(j,1);
+                        minPointY = info(j,2);
+                        minDist = sqrt((info(j,1)-info(i,1))^2 + (info(j,2)-info(i,2))^2);
+                        index = j;
+                            end
+                        end
+                 end
+            end
+       end
+   end
+% if first ==true
+%    fprintf('1');
+%    fprintf('%d\n',minPointX);
+%    fprintf('%d\n',minPointY);
+%    fprintf('%f\n',minDist);
+end

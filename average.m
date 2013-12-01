@@ -1,0 +1,64 @@
+%Ortadaki nokta hesaplanýr.
+function [info]= average(info) 
+    sizes=size(info);
+    sizex=sizes(1); 
+    sizey=sizes(2);  
+    sumx=0;
+    sumy=0;
+    count=0;
+    for i=1:sizex
+        sumx=sumx+info(i,1); 
+        sumy=sumy+info(i,2);
+        count=count+1;
+    end
+    prt(1,1)=(sumx/count);
+    prt(1,2)=(sumy/count);
+    info =  hesap(info, prt);
+    
+    
+end
+
+%ortadaki noktaya göre tüm noktalarýn açý hesabý yapýlýyor.%(egim=%(y2-y1)/(x2-x1))
+function [info] = hesap(info,prt)
+    sizes=size(info);
+    sizex=sizes(1); 
+    sizey=sizes(2);
+    fprintf('orta nokta: %f %f \n',prt(1,1),prt(1,2));
+    for i=1:sizex  
+        p(1,1)=info(i,1);
+        p(1,2)=info(i,2);
+        info(i,1)=p(1,1);
+        info(i,2)=p(1,2); 
+        info(i,3)=egim(prt,p );     
+    end
+    info = bubbleSort(info,sizex,sizey);
+end
+
+%egim ve açý hesabý yapýlýyor
+function result = egim( p1,p2)
+    m =(p2(1,2)-p1(1,2))/(p2(1,1)-p1(1,1));
+    result =180 * egim2(m)/ pi ;
+   
+    if p2(1,1) > p1(1,1) 
+        result = mod(result,360)  ;
+    else  
+        result = mod((result+180),360) ;    
+    end 
+end
+
+function result = egim2( m )   
+    result = atan(m);
+end
+
+%açý deðerlerine göre sýralama yapýlýyor
+function [info] = bubbleSort(info,sizex,sizey)
+    for j=1:sizex-1
+        for i=1:sizex-1
+            if info(i,3) > info(i+1,3)
+               temp=info(i,:);
+               info(i,:)=info(i+1,:);
+               info(i+1,:)=temp;
+            end
+        end
+    end
+end
